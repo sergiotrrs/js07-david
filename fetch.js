@@ -30,7 +30,8 @@ function hideLoading() {
 
 function fetchHandler(event) {
     displayLoading();
-    const url = `https://reqres.in/api/users?page=1`;
+    //const url = `http://localhost:8080/api/customers`;
+    const url = `https://ch22-ecommerce.up.railway.app/api/customers`;
     fetch(url)
     .then( response => {
         console.log("Status" + response.status);
@@ -41,10 +42,10 @@ function fetchHandler(event) {
    
     .then( data => {
         setTimeout (()=>{
-        console.log(data.data);
-       imprimir =  JSON.stringify(data.data);
+        console.log(data);
+       imprimir =  JSON.stringify(data);
        //imprimir =  data.data;
-       console.log(Object.keys(data.data[0]));
+       console.log(Object.keys(data[0]));
        console.log("hasta aqwui");
        
        hideLoading();
@@ -52,14 +53,14 @@ function fetchHandler(event) {
        
        let head = tabla.insertRow();
         console.log("a ver");
-       let columnas = Object.keys(data.data[0]);
+       let columnas = Object.keys(data[0]);
        columnas.forEach(column =>{
         //let row = document.getElementsByTagName("tr")
         head.insertCell().outerHTML = `<th>${column}</th>`;
         
        })
        
-        data.data.forEach((element) => {
+        data.forEach((element) => {
           //  console.log(element)
           let head = tabla.insertRow();
             Object.values(element).forEach((prop,indx) =>{
@@ -78,15 +79,15 @@ function fetchHandler(event) {
         };
 
        
-    },3000
+    },10
     );}
     
     
     )
     .catch(error => console.log(error));
-    setTimeout(()=>{
+    /* setTimeout(()=>{
         console.log("borrar")
         tabla.innerHTML = "";
         btn.disabled = false;
-    },7000)
+    },7000) */
 }
